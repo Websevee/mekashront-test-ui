@@ -70,7 +70,7 @@ export class RegisterComponent implements OnInit {
     this.authService.register(user).subscribe({
       next: (success) => {
         if (success) {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/auth/login']);
         }
       },
       error: (err) => {

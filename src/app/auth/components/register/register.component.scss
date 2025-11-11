@@ -23,7 +23,6 @@
 
 .register-card:hover {
   box-shadow: var(--shadow-glow), var(--glow-accent);
-  transform: translateY(-10px);
 }
 
 .card-body {
@@ -91,6 +90,7 @@
 
 .invalid-feedback i {
   margin-right: 0.25rem;
+  animation: none;
 }
 
 .btn-register {

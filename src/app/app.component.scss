@@ -18,6 +18,7 @@
   background-clip: text;
   text-shadow: var(--glow-primary);
   transition: var(--transition-medium);
+  cursor: pointer;
 }
 
 .navbar-brand:hover {
@@ -42,12 +43,14 @@
   padding: 0.5rem 1rem;
   border-radius: 5px;
   margin: 0 0.25rem;
+  cursor: pointer;
 }
 
 .nav-link:hover, .nav-link.active {
   color: var(--text-primary) !important;
   text-shadow: var(--glow-accent);
   background: rgba(106, 17, 203, 0.1);
+  transform: translateY(-2px);
 }
 
 .nav-link::after {
@@ -64,6 +67,10 @@
 
 .nav-link:hover::after, .nav-link.active::after {
   width: 80%;
+}
+
+.nav-link:active {
+  transform: translateY(0);
 }
 
 /* Main content container */
