@@ -77,20 +77,16 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 0;
 }
 
 .container.fade-in {
-  min-height: calc(100vh);
+  min-height: 100vh;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .navbar-brand {
     font-size: 1.25rem;
-  }
-
-  .container {
-    padding: 1rem 0.5rem;
   }
 }

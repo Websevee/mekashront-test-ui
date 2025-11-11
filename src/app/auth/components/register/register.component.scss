@@ -1,12 +1,10 @@
 /* Premium styling for register component */
 .register-container {
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 300px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem;
-  background: radial-gradient(circle at top left, rgba(142, 45, 226, 0.1) 0%, transparent 30%),
-              radial-gradient(circle at bottom right, rgba(0, 114, 255, 0.1) 0%, transparent 30%);
+  padding: 0.5rem 0;
 }
 
 .register-card {
