@@ -1,4 +1,221 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global Premium Dark Theme with Purple-Blue Gradients */
+:root {
+  /* Dark theme colors */
+  --dark-bg: #0a0a14;
+  --dark-bg-secondary: #121220;
+  --dark-bg-tertiary: #1a1a2e;
+
+  /* Premium gradient colors */
+  --gradient-primary-start: #6a11cb;
+  --gradient-primary-end: #2575fc;
+  --gradient-secondary-start: #8e2de2;
+  --gradient-secondary-end: #4a00e0;
+  --gradient-accent-start: #00c6ff;
+  --gradient-accent-end: #0072ff;
+
+  /* Text colors */
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0c0;
+  --text-accent: #00c6ff;
+
+  /* Glow effects */
+  --glow-primary: 0 0 15px rgba(106, 17, 203, 0.7);
+  --glow-secondary: 0 0 20px rgba(37, 117, 252, 0.5);
+  --glow-accent: 0 0 25px rgba(0, 198, 255, 0.8);
+
+  /* Shadows */
+  --shadow-primary: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 30px rgba(106, 17, 203, 0.3);
+
+  /* Transitions */
+  --transition-fast: all 0.3s ease;
+  --transition-medium: all 0.5s ease;
+  --transition-slow: all 0.8s ease;
+}
+
+/* Apply dark theme to entire application */
 html, body {
-  margin: 0 auto;
+  margin: 0;
+  padding: 0;
+  background: var(--dark-bg);
+  color: var(--text-primary);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--dark-bg-secondary) 0%, var(--dark-bg) 100%);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--gradient-primary-start), var(--gradient-primary-end));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--gradient-secondary-start), var(--gradient-secondary-end));
+}
+
+/* Utility classes for glow effects */
+.glow-primary {
+  box-shadow: var(--glow-primary);
+}
+
+.glow-secondary {
+  box-shadow: var(--glow-secondary);
+}
+
+.glow-accent {
+  box-shadow: var(--glow-accent);
+}
+
+/* Animation classes */
+@keyframes pulse {
+  0% {
+    box-shadow: var(--glow-primary);
+  }
+  50% {
+    box-shadow: var(--glow-secondary);
+  }
+  100% {
+    box-shadow: var(--glow-primary);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Bootstrap overrides for dark theme */
+.btn-primary {
+  background: linear-gradient(135deg, var(--gradient-primary-start), var(--gradient-primary-end));
+  border: none;
+  box-shadow: var(--glow-primary);
+  transition: var(--transition-medium);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--gradient-secondary-start), var(--gradient-secondary-end));
+  box-shadow: var(--glow-secondary);
+  transform: translateY(-2px);
+}
+
+.btn-outline-secondary {
+  color: var(--text-secondary);
+  border-color: var(--dark-bg-tertiary);
+  transition: var(--transition-fast);
+}
+
+.btn-outline-secondary:hover {
+  color: var(--text-primary);
+  background: var(--dark-bg-tertiary);
+  border-color: var(--gradient-accent-start);
+  box-shadow: var(--glow-accent);
+}
+
+.form-control {
+  background-color: var(--dark-bg-tertiary);
+  border: 1px solid var(--dark-bg-tertiary);
+  color: var(--text-primary);
+  transition: var(--transition-fast);
+}
+
+.form-control:focus {
+  background-color: var(--dark-bg-secondary);
+  border-color: var(--gradient-accent-start);
+  box-shadow: var(--glow-accent);
+  color: var(--text-primary);
+}
+
+.form-label {
+  color: var(--text-secondary);
+}
+
+.invalid-feedback {
+  color: #ff6b6b;
+}
+
+.alert-danger {
+  background: rgba(255, 107, 107, 0.15);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  color: #ff6b6b;
+}
+
+.card {
+  background: var(--dark-bg-secondary);
+  border: 1px solid rgba(106, 17, 203, 0.2);
+  box-shadow: var(--shadow-primary);
+  transition: var(--transition-medium);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-5px);
+}
+
+.navbar {
+  background: linear-gradient(90deg, var(--dark-bg-secondary), var(--dark-bg-tertiary)) !important;
+  box-shadow: var(--glow-primary);
+  border-bottom: 1px solid rgba(106, 17, 203, 0.3);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--gradient-primary-start), var(--gradient-accent-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: var(--glow-primary);
+}
+
+.nav-link {
+  color: var(--text-secondary) !important;
+  transition: var(--transition-fast);
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--text-primary) !important;
+  text-shadow: var(--glow-accent);
+}
+
+/* Container animations */
+.container {
+  animation: fadeIn 1s ease-out;
 }

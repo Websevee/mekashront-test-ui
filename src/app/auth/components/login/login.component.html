@@ -1,43 +1,53 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center login-container">
   <div class="col-md-6 col-lg-5">
-    <div class="card shadow">
+    <div class="card login-card shadow">
       <div class="card-body p-5">
-        <h2 class="text-center mb-4">Вход</h2>
+        <h2 class="text-center mb-4 login-title">Вход</h2>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <div class="mb-3">
-            <label for="username" class="form-label">Имя пользователя</label>
+          <div class="mb-3 form-group">
+            <label for="username" class="form-label">
+              <i class="fas fa-user"></i> Имя пользователя
+            </label>
             <input
               type="text"
               id="username"
               formControlName="username"
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+              placeholder="Введите имя пользователя"
             />
             <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+              <i class="fas fa-exclamation-circle"></i>
               <div *ngIf="f['username'].errors['required']">Имя пользователя обязательно</div>
             </div>
           </div>
 
-          <div class="mb-3">
-            <label for="password" class="form-label">Пароль</label>
+          <div class="mb-3 form-group">
+            <label for="password" class="form-label">
+              <i class="fas fa-lock"></i> Пароль
+            </label>
             <input
               type="password"
               id="password"
               formControlName="password"
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+              placeholder="Введите пароль"
             />
             <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+              <i class="fas fa-exclamation-circle"></i>
               <div *ngIf="f['password'].errors['required']">Пароль обязателен</div>
             </div>
           </div>
 
           <div class="d-grid gap-2 mb-3">
-            <button type="submit" class="btn btn-primary">Войти</button>
-            <button type="button" class="btn btn-outline-secondary" (click)="router.navigate(['/auth/register'])">Нет аккаунта? Зарегистрироваться</button>
+            <button type="submit" class="btn btn-login">Войти</button>
+            <button type="button" class="btn btn-register" (click)="router.navigate(['/auth/register'])">Нет аккаунта? Зарегистрироваться</button>
           </div>
 
-          <div *ngIf="error" class="alert alert-danger" role="alert">{{ error }}</div>
+          <div *ngIf="error" class="alert alert-danger" role="alert">
+            <i class="fas fa-exclamation-triangle"></i> {{ error }}
+          </div>
         </form>
       </div>
     </div>
