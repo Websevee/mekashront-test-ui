@@ -73,9 +73,8 @@
   padding: 2rem 1rem;
 }
 
-/* Animation for main content */
-.container mt-4 {
-  animation: fadeIn 1s ease-out;
+.container.fade-in {
+  min-height: calc(100vh);
 }
 
 /* Responsive adjustments */

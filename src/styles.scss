@@ -41,7 +41,12 @@ html, body {
   color: var(--text-primary);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--dark-bg-secondary) 0%, var(--dark-bg) 100%);
+  background:
+    radial-gradient(circle at top right, rgba(106, 17, 203, 0.1) 0%, transparent 30%),
+    radial-gradient(circle at bottom left, rgba(0, 198, 255, 0.1) 0%, transparent 30%),
+    linear-gradient(135deg, var(--dark-bg-secondary) 0%, var(--dark-bg) 100%);
+  background-size: 100% 100%;
+  background-attachment: fixed;
 }
 
 /* Custom scrollbar */
