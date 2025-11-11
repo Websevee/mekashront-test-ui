@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { User } from '../models/user.model';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
     public formBuilder: FormBuilder,
     public authService: AuthService,
     public router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
@@ -62,7 +62,6 @@ export class RegisterComponent implements OnInit {
     }
 
     const user: User = {
-      id: Date.now(), // Для демонстрации, в реальном приложении ID будет генерироваться сервером
       username: this.registerForm.value.username,
       email: this.registerForm.value.email,
       password: this.registerForm.value.password

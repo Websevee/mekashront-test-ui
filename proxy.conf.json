@@ -1,0 +1,9 @@
+{
+  "/icu-tech/": {
+    "target": "http://isapi.mekashron.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "ws": true
+  }
+}

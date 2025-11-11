@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { User } from '../models/user.model';
+import { SoapService } from '../../core/services/soap.service';
+import { LoginResponse } from '../models/login-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ export class AuthService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   public isLoggedIn = this.isLoggedInSubject.asObservable();
 
-  constructor() {
+  constructor(private readonly soapService: SoapService) {
     // Проверяем, есть ли сохраненный пользователь в localStorage
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) {
@@ -44,6 +46,31 @@ export class AuthService {
       }
     }
     return of(null);
+  }
+
+  loginSoap(username: string, password: string): Observable<LoginResponse | null> {
+    const params = {
+      method: 'Login',
+      parameters: {
+        UserName: username,
+        Password: password
+      }
+    };
+
+    return this.soapService.callSoapMethod<string>(params)
+      .pipe(
+        map(response => {
+          if (response.success && response.data) {
+            try {
+              return this.soapService.extractJsonFromSoapResponse(response.data);
+            } catch (error) {
+              console.error('Ошибка парсинга ответа:', error);
+              return null;
+            }
+          }
+          return null;
+        })
+      );
   }
 
   logout(): void {

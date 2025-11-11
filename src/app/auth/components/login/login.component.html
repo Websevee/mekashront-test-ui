@@ -34,7 +34,7 @@
 
           <div class="d-grid gap-2 mb-3">
             <button type="submit" class="btn btn-primary">Войти</button>
-            <button type="button" class="btn btn-outline-secondary" (click)="router.navigate(['/register'])">Нет аккаунта? Зарегистрироваться</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="router.navigate(['/auth/register'])">Нет аккаунта? Зарегистрироваться</button>
           </div>
 
           <div *ngIf="error" class="alert alert-danger" role="alert">{{ error }}</div>
