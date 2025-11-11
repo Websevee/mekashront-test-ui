@@ -57,3 +57,18 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Deployment
+
+This project is configured for automatic deployment to GitHub Pages using GitHub Actions. The deployment workflow is defined in `.github/workflows/deploy.yml`.
+
+The deployment is triggered automatically on every push to the `main` branch. It builds the application in production mode and deploys it to the `gh-pages` branch, which is then served by GitHub Pages.
+
+To configure GitHub Pages for this repository:
+1. Go to the repository settings on GitHub
+2. Navigate to the "Pages" section
+3. Select "Deploy from a branch" as the source
+4. Choose "gh-pages" as the branch and "/ (root)" as the folder
+5. Click "Save"
+
+After the initial deployment, your site will be available at: `https://[username].github.io/mekashront-test-ui/`
