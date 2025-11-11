@@ -71,4 +71,4 @@ To configure GitHub Pages for this repository:
 4. Choose "gh-pages" as the branch and "/ (root)" as the folder
 5. Click "Save"
 
-After the initial deployment, your site will be available at: `https://[username].github.io/mekashront-test-ui/`
+After the initial deployment, your site will be available at: `https://websevee.github.io/mekashront-test-ui/`
