@@ -1,72 +1,76 @@
-<div class="register-container">
-  <div class="register-form">
-    <h2>Регистрация</h2>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="username">Имя пользователя</label>
-        <input
-          type="text"
-          id="username"
-          formControlName="username"
-          class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
-        />
-        <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
-          <div *ngIf="f['username'].errors['required']">Имя пользователя обязательно</div>
-        </div>
-      </div>
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-5">
+    <div class="card shadow">
+      <div class="card-body p-5">
+        <h2 class="text-center mb-4">Регистрация</h2>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="username" class="form-label">Имя пользователя</label>
+            <input
+              type="text"
+              id="username"
+              formControlName="username"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+            />
+            <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+              <div *ngIf="f['username'].errors['required']">Имя пользователя обязательно</div>
+            </div>
+          </div>
 
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          formControlName="email"
-          class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
-        />
-        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-          <div *ngIf="f['email'].errors['required']">Email обязателен</div>
-          <div *ngIf="f['email'].errors['email']">Введите корректный email</div>
-        </div>
-      </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+            />
+            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+              <div *ngIf="f['email'].errors['required']">Email обязателен</div>
+              <div *ngIf="f['email'].errors['email']">Введите корректный email</div>
+            </div>
+          </div>
 
-      <div class="form-group">
-        <label for="password">Пароль</label>
-        <input
-          type="password"
-          id="password"
-          formControlName="password"
-          class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
-        />
-        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-          <div *ngIf="f['password'].errors['required']">Пароль обязателен</div>
-          <div *ngIf="f['password'].errors['minlength']">Пароль должен содержать минимум 6 символов</div>
-        </div>
-      </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Пароль</label>
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+            />
+            <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+              <div *ngIf="f['password'].errors['required']">Пароль обязателен</div>
+              <div *ngIf="f['password'].errors['minlength']">Пароль должен содержать минимум 6 символов</div>
+            </div>
+          </div>
 
-      <div class="form-group">
-        <label for="confirmPassword">Подтверждение пароля</label>
-        <input
-          type="password"
-          id="confirmPassword"
-          formControlName="confirmPassword"
-          class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
-        />
-        <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
-          <div *ngIf="f['confirmPassword'].errors['required']">Подтверждение пароля обязательно</div>
-          <div *ngIf="f['confirmPassword'].errors['mustMatch']">Пароли не совпадают</div>
-        </div>
-      </div>
+          <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Подтверждение пароля</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+            />
+            <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
+              <div *ngIf="f['confirmPassword'].errors['required']">Подтверждение пароля обязательно</div>
+              <div *ngIf="f['confirmPassword'].errors['mustMatch']">Пароли не совпадают</div>
+            </div>
+          </div>
 
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-        <button type="button" class="btn btn-secondary" (click)="router.navigate(['/login'])">Уже есть аккаунт? Войти</button>
-      </div>
+          <div class="d-grid gap-2 mb-3">
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="router.navigate(['/login'])">Уже есть аккаунт? Войти</button>
+          </div>
 
-      <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
-    </form>
+          <div *ngIf="error" class="alert alert-danger" role="alert">{{ error }}</div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
