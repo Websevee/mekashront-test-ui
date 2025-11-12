@@ -5,20 +5,38 @@
         <h2 class="text-center mb-4 register-title">Registration</h2>
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
           <div class="mb-3 form-group">
-            <label for="username" class="form-label">
-              <i class="fas fa-user"></i> Username
+            <label for="firstName" class="form-label">
+              <i class="fas fa-user"></i> First Name
             </label>
             <input
               type="text"
-              id="username"
-              formControlName="username"
+              id="firstName"
+              formControlName="firstName"
               class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
-              placeholder="Enter username"
+              [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
+              placeholder="Enter first name"
             />
-            <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+            <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
               <i class="fas fa-exclamation-circle"></i>
-              <div *ngIf="f['username'].errors['required']">Username is required</div>
+              <div *ngIf="f['firstName'].errors['required']">First name is required</div>
+            </div>
+          </div>
+
+          <div class="mb-3 form-group">
+            <label for="lastName" class="form-label">
+              <i class="fas fa-user"></i> Last Name
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              formControlName="lastName"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
+              placeholder="Enter last name"
+            />
+            <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+              <i class="fas fa-exclamation-circle"></i>
+              <div *ngIf="f['lastName'].errors['required']">Last name is required</div>
             </div>
           </div>
 

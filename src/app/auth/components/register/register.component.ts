@@ -25,7 +25,8 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
@@ -61,21 +62,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    const user: User = {
-      username: this.registerForm.value.username,
-      email: this.registerForm.value.email,
-      password: this.registerForm.value.password
-    };
-
-    this.authService.register(user).subscribe({
-      next: (success) => {
-        if (success) {
-          this.router.navigate(['/auth/login']);
-        }
-      },
-      error: (err) => {
-        this.error = 'Registration failed. Please try again.';
-      }
-    });
+    // Show development message instead of submitting the form
+    alert('Currently in development');
   }
 }
