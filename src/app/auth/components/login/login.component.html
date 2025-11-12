@@ -48,6 +48,9 @@
           <div *ngIf="error" class="alert alert-danger" role="alert">
             <i class="fas fa-exclamation-triangle"></i> {{ error }}
           </div>
+          <div *ngIf="successMessage" class="alert alert-success" role="alert">
+            <i class="fas fa-check-circle"></i> {{ successMessage }}
+          </div>
         </form>
       </div>
     </div>

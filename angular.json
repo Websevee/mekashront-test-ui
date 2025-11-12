@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mekashront-test-ui": {
+    "mekashron-test-ui": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/mekashront-test-ui",
+            "outputPath": "dist/mekashron-test-ui",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mekashront-test-ui:build:production"
+              "buildTarget": "mekashron-test-ui:build:production"
             },
             "development": {
-              "buildTarget": "mekashront-test-ui:build:development"
+              "buildTarget": "mekashron-test-ui:build:development"
             }
           },
           "defaultConfiguration": "development",

@@ -23,16 +23,16 @@ jobs:
         run: npm install
 
       - name: Build Angular app
-        run: npm run build -- --configuration production --base-href /mekashront-test-ui/
+        run: npm run build -- --configuration production --base-href /mekashron-test-ui/
 
       - name: Check build artifacts
         run: |
-          ls -la ./dist/mekashront-test-ui
-          if [ ! -d "./dist/mekashront-test-ui" ]; then
+          ls -la ./dist/mekashron-test-ui
+          if [ ! -d "./dist/mekashron-test-ui" ]; then
             echo "Build failed: dist directory does not exist"
             exit 1
           fi
-          if [ -z "$(ls -A ./dist/mekashront-test-ui)" ]; then
+          if [ -z "$(ls -A ./dist/mekashron-test-ui)" ]; then
             echo "Build failed: dist directory is empty"
             exit 1
           fi
@@ -41,4 +41,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/mekashront-test-ui/browser
+          publish_dir: ./dist/mekashron-test-ui/browser

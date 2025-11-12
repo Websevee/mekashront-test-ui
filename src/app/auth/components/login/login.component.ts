@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   submitted = false;
   error = '';
+  successMessage = '';
 
   constructor(
     public formBuilder: FormBuilder,
@@ -43,11 +44,15 @@ export class LoginComponent implements OnInit {
   }
 
   private login(username: string, password: string) {
+    // Очищаем предыдущие сообщения перед новой попыткой входа
+    this.error = '';
+    this.successMessage = '';
     this.authService.loginSoap(username, password)
       .subscribe({
         next: (user) => {
           if (user) {
             console.log(user);
+            this.successMessage = 'Вы успешно вошли в систему!';
           } else {
             this.error = 'Неверное имя пользователя или пароль';
           }
