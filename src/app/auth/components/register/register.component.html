@@ -2,11 +2,11 @@
   <div class="col-md-6 col-lg-5">
     <div class="card register-card shadow">
       <div class="card-body p-5">
-        <h2 class="text-center mb-4 register-title">Регистрация</h2>
+        <h2 class="text-center mb-4 register-title">Registration</h2>
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
           <div class="mb-3 form-group">
             <label for="username" class="form-label">
-              <i class="fas fa-user"></i> Имя пользователя
+              <i class="fas fa-user"></i> Username
             </label>
             <input
               type="text"
@@ -14,11 +14,11 @@
               formControlName="username"
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
-              placeholder="Введите имя пользователя"
+              placeholder="Enter username"
             />
             <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
               <i class="fas fa-exclamation-circle"></i>
-              <div *ngIf="f['username'].errors['required']">Имя пользователя обязательно</div>
+              <div *ngIf="f['username'].errors['required']">Username is required</div>
             </div>
           </div>
 
@@ -32,18 +32,18 @@
               formControlName="email"
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
-              placeholder="Введите email"
+              placeholder="Enter email"
             />
             <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
               <i class="fas fa-exclamation-circle"></i>
-              <div *ngIf="f['email'].errors['required']">Email обязателен</div>
-              <div *ngIf="f['email'].errors['email']">Введите корректный email</div>
+              <div *ngIf="f['email'].errors['required']">Email is required</div>
+              <div *ngIf="f['email'].errors['email']">Enter a valid email</div>
             </div>
           </div>
 
           <div class="mb-3 form-group">
             <label for="password" class="form-label">
-              <i class="fas fa-lock"></i> Пароль
+              <i class="fas fa-lock"></i> Password
             </label>
             <input
               type="password"
@@ -51,18 +51,18 @@
               formControlName="password"
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
-              placeholder="Введите пароль"
+              placeholder="Enter password"
             />
             <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
               <i class="fas fa-exclamation-circle"></i>
-              <div *ngIf="f['password'].errors['required']">Пароль обязателен</div>
-              <div *ngIf="f['password'].errors['minlength']">Пароль должен содержать минимум 6 символов</div>
+              <div *ngIf="f['password'].errors['required']">Password is required</div>
+              <div *ngIf="f['password'].errors['minlength']">Password must be at least 6 characters</div>
             </div>
           </div>
 
           <div class="mb-3 form-group">
             <label for="confirmPassword" class="form-label">
-              <i class="fas fa-lock"></i> Подтверждение пароля
+              <i class="fas fa-lock"></i> Confirm Password
             </label>
             <input
               type="password"
@@ -70,18 +70,18 @@
               formControlName="confirmPassword"
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
-              placeholder="Подтвердите пароль"
+              placeholder="Confirm password"
             />
             <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
               <i class="fas fa-exclamation-circle"></i>
-              <div *ngIf="f['confirmPassword'].errors['required']">Подтверждение пароля обязательно</div>
-              <div *ngIf="f['confirmPassword'].errors['mustMatch']">Пароли не совпадают</div>
+              <div *ngIf="f['confirmPassword'].errors['required']">Confirm password is required</div>
+              <div *ngIf="f['confirmPassword'].errors['mustMatch']">Passwords do not match</div>
             </div>
           </div>
 
           <div class="d-grid gap-2 mb-3">
-            <button type="submit" class="btn btn-register">Зарегистрироваться</button>
-            <button type="button" class="btn btn-login" (click)="router.navigate(['/auth/login'])">Уже есть аккаунт? Войти</button>
+            <button type="submit" class="btn btn-register">Register</button>
+            <button type="button" class="btn btn-login" (click)="router.navigate(['/auth/login'])">Already have an account? Login</button>
           </div>
 
           <div *ngIf="error" class="alert alert-danger" role="alert">

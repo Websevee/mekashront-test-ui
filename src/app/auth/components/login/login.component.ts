@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { ErrorResponse } from '../../models/error-response.model';
+import { LoginResponse } from '../../models/login-response.model';
 
 @Component({
   selector: 'app-login',
@@ -44,21 +46,28 @@ export class LoginComponent implements OnInit {
   }
 
   private login(username: string, password: string) {
-    // Очищаем предыдущие сообщения перед новой попыткой входа
+    // Clear previous messages before new login attempt
     this.error = '';
     this.successMessage = '';
     this.authService.loginSoap(username, password)
       .subscribe({
-        next: (user) => {
-          if (user) {
-            console.log(user);
-            this.successMessage = 'Вы успешно вошли в систему!';
+        next: (loginResponse) => {
+          if (loginResponse) {
+            if (loginResponse as LoginResponse !== null) {
+              console.log(loginResponse);
+              this.successMessage = `Welcome, ${username}. You have successfully logged in!`;
+            } else {
+              const errorResponse = loginResponse as ErrorResponse;
+              if (errorResponse.ResultMessage === 'User not found')
+                this.error = 'User does not exist';
+              else this.error = errorResponse.ResultMessage;
+            }
           } else {
-            this.error = 'Неверное имя пользователя или пароль';
+            this.error = 'Invalid username or password';
           }
         },
         error: (err) => {
-          this.error = 'Ошибка входа. Пожалуйста, попробуйте еще раз.';
+          this.error = 'Login error. Please try again.';
         }
       });
   }

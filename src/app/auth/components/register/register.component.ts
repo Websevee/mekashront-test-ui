@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  // Пользовательская валидация для проверки совпадения паролей
+  // Custom validation to check password match
   mustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];

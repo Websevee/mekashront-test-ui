@@ -3,6 +3,7 @@ import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { User } from '../models/user.model';
 import { SoapService } from '../../core/services/soap.service';
 import { LoginResponse } from '../models/login-response.model';
+import { ErrorResponse } from '../models/error-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AuthService {
   public isLoggedIn = this.isLoggedInSubject.asObservable();
 
   constructor(private readonly soapService: SoapService) {
-    // Проверяем, есть ли сохраненный пользователь в localStorage
+    // Check if there is a saved user in localStorage
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) {
       const user = JSON.parse(savedUser);
@@ -25,8 +26,8 @@ export class AuthService {
   }
 
   register(user: User): Observable<boolean> {
-    // В реальном приложении здесь будет HTTP запрос к серверу
-    // Для демонстрации просто сохраняем пользователя в localStorage
+    // In a real application, there will be an HTTP request to the server here
+    // For demonstration, we just save the user to localStorage
     localStorage.setItem('currentUser', JSON.stringify(user));
     this.currentUserSubject.next(user);
     this.isLoggedInSubject.next(true);
@@ -34,8 +35,8 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<User | null> {
-    // В реальном приложении здесь будет HTTP запрос к серверу
-    // Для демонстрации проверяем данные из localStorage
+    // In a real application, there will be an HTTP request to the server here
+    // For demonstration, we check the data from localStorage
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) {
       const user = JSON.parse(savedUser);
@@ -48,7 +49,7 @@ export class AuthService {
     return of(null);
   }
 
-  loginSoap(username: string, password: string): Observable<LoginResponse | null> {
+  loginSoap(username: string, password: string): Observable<LoginResponse | ErrorResponse | null> {
     const params = {
       method: 'Login',
       parameters: {

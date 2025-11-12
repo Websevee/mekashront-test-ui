@@ -17,7 +17,7 @@ export class SoapService {
   constructor(private http: HttpClient) { }
 
   /**
-   * Общий метод для выполнения SOAP запросов с generic типом
+   * Generic method for executing SOAP requests with generic type
    */
   callSoapMethod<T = any>(params: SoapRequestParams): Observable<SoapResponse<T>> {
     const soapEnvelope = this.buildSoapEnvelope(params);
@@ -34,7 +34,7 @@ export class SoapService {
   }
 
   /**
-   * Метод с автоматическим парсингом XML в указанный тип
+   * Method with automatic XML parsing to specified type
    */
   callSoapMethodWithParsing<T = any>(
     params: SoapRequestParams,
@@ -59,7 +59,7 @@ export class SoapService {
         } catch (parseError) {
           return {
             success: false,
-            error: `Ошибка парсинга XML: ${parseError}`,
+            error: `XML parsing error: ${parseError}`,
             status: response.status,
             rawResponse: response.data
           };
@@ -69,7 +69,7 @@ export class SoapService {
   }
 
   /**
-   * Специализированный парсер для извлечения JSON из тега <return> в SOAP-ответе
+   * Specialized parser for extracting JSON from <return> tag in SOAP response
    */
   extractJsonFromSoapResponse(xmlResponse: string): any {
     try {
@@ -104,12 +104,12 @@ export class SoapService {
       // Если тег <return> не найден, возвращаем весь XML как строку
       return xmlResponse;
     } catch (error) {
-      throw new Error(`Ошибка извлечения JSON из SOAP ответа: ${error}`);
+      throw new Error(`Error extracting JSON from SOAP response: ${error}`);
     }
   }
 
   /**
-   * Обработка успешного ответа с generic типом
+   * Handling successful response with generic type
    */
   private handleSuccessResponse<T>(response: any): SoapResponse<T> {
     try {
@@ -124,14 +124,14 @@ export class SoapService {
     } catch (error) {
       return {
         success: false,
-        error: `Ошибка обработки ответа: ${error}`,
+        error: `Error processing response: ${error}`,
         status: 200
       } as SoapResponse<T>;
     }
   }
 
   /**
-   * Автоматический парсинг ответа
+   * Automatic response parsing
    */
   private autoParseResponse<T>(xmlResponse: string): T {
     const xmlDoc = this.parseSoapResponse(xmlResponse);
@@ -144,7 +144,7 @@ export class SoapService {
   }
 
   /**
-   * Преобразование XML в JSON (базовая реализация)
+   * Converting XML to JSON (basic implementation)
    */
   private xmlToJson(xml: Element): any {
     const obj: any = {};
@@ -184,21 +184,21 @@ export class SoapService {
   }
 
   /**
-   * Обработка ошибок с generic типом
+   * Error handling with generic type
    */
   private handleError<T>(error: any): Observable<SoapResponse<T>> {
-    let errorMessage = 'Произошла ошибка при выполнении SOAP запроса';
+    let errorMessage = 'An error occurred while executing SOAP request';
     let status = error.status;
 
     if (error.status === 0) {
-      errorMessage = 'Ошибка сети: невозможно подключиться к серверу';
+      errorMessage = 'Network error: unable to connect to server';
       status = 0;
     } else if (error.status === 404) {
-      errorMessage = 'SOAP сервис не найден';
+      errorMessage = 'SOAP service not found';
     } else if (error.status === 500) {
-      errorMessage = 'Внутренняя ошибка сервера';
+      errorMessage = 'Internal server error';
     } else if (error.name === 'TimeoutError') {
-      errorMessage = 'Превышено время ожидания ответа от сервера';
+      errorMessage = 'Response timeout from server';
       status = 408;
     }
 
@@ -209,7 +209,7 @@ export class SoapService {
     } as SoapResponse<T>));
   }
 
-  // Остальные методы остаются без изменений
+  // Other methods remain unchanged
   private buildSoapEnvelope(params: SoapRequestParams): string {
     const namespace = params.namespace || this.defaultNamespace;
     const parametersXml = this.buildParametersXml(params.parameters);
@@ -295,7 +295,7 @@ export class SoapService {
 
       return xmlDoc;
     } catch (error) {
-      throw new Error(`Ошибка парсинга SOAP ответа: ${error}`);
+      throw new Error(`Error parsing SOAP response: ${error}`);
     }
   }
 }
