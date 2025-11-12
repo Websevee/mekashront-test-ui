@@ -12,33 +12,53 @@ jobs:
       contents: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "20"
+          cache: "npm"
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Cache Angular build
+        uses: actions/cache@v4
+        with:
+          path: .angular/cache
+          key: ${{ runner.os }}-angular-${{ hashFiles('**/angular.json') }}
+          restore-keys: |
+            ${{ runner.os }}-angular-
 
       - name: Build Angular app
         run: npm run build -- --configuration production --base-href /mekashron-test-ui/
 
       - name: Check build artifacts
         run: |
-          ls -la ./dist/mekashron-test-ui
-          if [ ! -d "./dist/mekashron-test-ui" ]; then
+          if [ ! -d "./dist/mekashron-test-ui/browser" ]; then
             echo "Build failed: dist directory does not exist"
             exit 1
           fi
-          if [ -z "$(ls -A ./dist/mekashron-test-ui)" ]; then
+
+          file_count=$(ls -1 ./dist/mekashron-test-ui/browser | wc -l)
+          if [ "$file_count" -eq 0 ]; then
             echo "Build failed: dist directory is empty"
             exit 1
           fi
 
+          echo "Build successful: $file_count files found in dist directory"
+
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist/mekashron-test-ui/browser
