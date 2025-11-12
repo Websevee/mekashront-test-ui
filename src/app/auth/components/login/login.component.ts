@@ -51,24 +51,73 @@ export class LoginComponent implements OnInit {
     this.successMessage = '';
     this.authService.loginSoap(username, password)
       .subscribe({
-        next: (loginResponse) => {
-          if (loginResponse) {
-            if (loginResponse as LoginResponse !== null) {
-              console.log(loginResponse);
-              this.successMessage = `Welcome, ${username}. You have successfully logged in!`;
-            } else {
-              const errorResponse = loginResponse as ErrorResponse;
-              if (errorResponse.ResultMessage === 'User not found')
-                this.error = 'User does not exist';
-              else this.error = errorResponse.ResultMessage;
-            }
+        next: (response) => {
+          // Проверяем тип response и применяем соответствующую логику
+          if (this.isLoginResponse(response)) {
+            this.handleLoginSuccess(response);
+          } else if (this.isErrorResponse(response)) {
+            this.handleError(response);
+          } else if (response === null) {
+            this.handleNullResponse();
           } else {
-            this.error = 'Invalid username or password';
+            this.handleUnexpectedResponse(response);
           }
         },
         error: (err) => {
           this.error = 'Login error. Please try again.';
+          console.error('Login HTTP error:', err);
         }
       });
+  }
+
+  /**
+   * Проверяет, является ли объект LoginResponse
+   */
+  private isLoginResponse(obj: any): obj is LoginResponse {
+    return obj && typeof obj === 'object' && 'EntityId' in obj && typeof obj.EntityId === 'number';
+  }
+
+  /**
+   * Проверяет, является ли объект ErrorResponse
+   */
+  private isErrorResponse(obj: any): obj is ErrorResponse {
+    return obj && typeof obj === 'object' && 'ResultCode' in obj && typeof obj.ResultCode === 'number';
+  }
+
+  /**
+   * Обрабатывает успешный ответ LoginResponse
+   */
+  private handleLoginSuccess(response: LoginResponse): void {
+    console.log('Login successful:', response);
+    this.successMessage = `Welcome, ${response.FirstName} ${response.LastName}. You have successfully logged in!`;
+    // Здесь можно добавить дополнительную логику после успешного логина
+    // Например, сохранение пользователя в AuthService или перенаправление
+  }
+
+  /**
+   * Обрабатывает ошибку ErrorResponse
+   */
+  private handleError(response: ErrorResponse): void {
+    console.log('Login error:', response);
+    if (response.ResultMessage === 'User not found') {
+      this.error = 'Invalid username or password';
+    } else {
+      this.error = response.ResultMessage;
+    }
+  }
+
+  /**
+   * Обрабатывает null response
+   */
+  private handleNullResponse(): void {
+    this.error = 'Invalid username or password';
+  }
+
+  /**
+   * Обрабатывает неожиданный тип response
+   */
+  private handleUnexpectedResponse(response: any): void {
+    this.error = 'Unexpected response format';
+    console.error('Unexpected response type:', response);
   }
 }
